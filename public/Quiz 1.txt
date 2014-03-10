@@ -1,0 +1,107 @@
+Quiz from lesson one materials. You can do this yourself, or create a new gist or blog entry, answer the quiz, and post the link to the forums and others can take a look.
+
+Why do they call it a relational database?
+  Because 2 or more tables are linked together to create a "relationship" 
+
+What is SQL?
+  SQL stands for structured query language and it is the languaged used to manage and alter the database
+
+There are two predominant views into a relational database. What are they, and how are they different?
+  Table view - This allows the you to view the data inside a table
+  Schema view - This allows you to see the names of the columns and what type the column is (integer, string, text, ect)
+
+In a table, what do we call the column that serves as the main identifier for a row of data? We're looking for the general database term, not the column name.
+  Primary ID
+
+What is a foreign key, and how is it used?
+  A "foreign" key links to the primary key of the "foreign" table.
+
+At a high level, describe the ActiveRecord pattern. This has nothing to do with Rails, but the actual pattern that ActiveRecord uses to perform its ORM duties.
+
+
+If there's an ActiveRecord model called "CrazyMonkey", what should the table name be?
+  crazy_monkey
+
+If I'm building a 1:M association between Project and Issue, what will the model associations and foreign key be?
+  class Project < ActiveRecord::Base
+    has_many :issues
+  end
+
+  class Issue < ActiveRecord::Base
+    belongs_to :project
+  end
+
+  The foreign key will be project_id in the issues table
+
+Given this code:
+class Zoo < ActiveRecord::Base
+  has_many :animals
+end
+
+What do you expect the other model to be and what does database schema look like?
+  Other model:
+    class Animal < ActiveRecord::Base
+      belongs_to :zoo
+    end
+
+    foreign key will be zoo_id in the animal table
+
+What are the methods that are now available to a zoo to call related to animals?
+  Zoo.animals
+
+How do I create an animal called "jumpster" in a zoo called "San Diego Zoo"?
+  Zoo.Create(name: "San Deigo Zoo")
+  Animal.Create(name: "jumpster", zoo_id: 1)
+
+What is mass assignment? What's the non-mass assignment way of setting values?
+  Mass assignment is the way to setting multiple attributes to an object.
+  Animal.Create(name: "jumpster", zoo_id: 1)
+
+  Non mass assignment:
+  a = Animal.Create
+  a.name = "jumpster"
+  a.zoo_id = 1
+
+What does this code do? Animal.first
+  Shows what is in the row of the animal table with the primary ID of 1
+
+If I have a table called "animals" with columns called "name", and a model called Animal, how do I instantiate an animal object with name set to "Joe". Which methods makes sure it saves to the database?
+  Had to learn what instantiate means to answer this question :P
+
+  Animal.Create(name: "Joe")
+
+How does a M:M association work at the database level?
+  It works via a join table. a a 1:M is create at the model association of each table and a through: added on the main tables association 
+
+What are the two ways to support a M:M association at the ActiveRecord model level? Pros and cons of each approach?
+  has_many_belongs_to:
+    Pro:
+      Don't need to setup a model association
+      No join table needed
+    Con:
+      Can't change in the future (less flexability)
+  has_many through:
+    Pro:
+      Can add more columns and greater flexibility
+    Con:
+      Have to setup a model
+      Join Table needed
+
+Suppose we have a User model and a Group model, and we have a M:M association all set up. How do we associate the two?
+
+  User Model
+    class User < ActiveRecord::Base
+        has_many :user_groups
+        has_many :groups, through: :user_groups
+    end
+
+  M:M Model
+    class UserGroup < ActiveRecord::Base
+        belongs_to :user
+        belongs_to :group
+    end
+The Group model:
+  class Group < ActiveRecord::Base
+      has_many :user_groups
+      has_many :users, through: :user_groups
+  end
