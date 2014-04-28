@@ -10,10 +10,6 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
     </div>
-    <div class="control-group">
-      <%= f.label :phone_number %>
-      <%= f.text_field :phone_number %>
-    </div>
     <%= f.submit (@user.new_record? ? "Register" : "Update Profile"), class: "btn btn-success btn-small" %>
   <% end %>
 </div>
