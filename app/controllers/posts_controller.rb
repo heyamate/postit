@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:notice] = "Your post has been created"
-      redirect_to post_path
+      redirect_to root_path
     else
       render :new
     end
