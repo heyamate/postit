@@ -1,0 +1,26 @@
+<%= render "/shared/error", obj: @post %>
+
+<div class="well">
+  <%= form_for @post do |f| %>
+    <div class="control-group">
+      <%= f.label :title, "Title of the Post:" %>
+      <%= f.text_field :title, placeholder: "Please insert title" %>
+    </div>
+    <div class="control-group">
+      <%= f.label :url, "Web site address" %>
+      <%= f.text_field :url, placeholder: "example: www.google.com" %>
+    </div>
+    <div class="control-group">
+      <%= f.label :description, "Describe this site:" %>
+      <%= f.text_area :description, rows: 5, placeholder: "Why should people look at this site?" %>
+    </div>
+    <div class="control-group">
+      <%= f.collection_check_boxes :category_ids, Category.all.sort_by{|a| a.name}, :id, :name do |cb| %>
+        <%= cb.label class: "checkbox inline" %>
+        <%= cb.check_box class: "checkbox" %>
+      <% end %>
+    </div>
+    <br>
+    <%= f.submit "Create Post", class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+<%= render "shared/content_title", title: "Categories" %>
+
+<% @category.each do |cat| %>
+  <span class="badge"><%= cat.name %></span>
+<% end %>

@@ -1,0 +1,38 @@
+Name all the 7 (or 8) routes exposed by the resources keyword in the routes.rb file. Also name the 4 named routes, and how the request is routed to the controller/action.
+  1 - Index
+  2 - Create
+  3 - New
+  4 - Show
+  5 - Edit
+  6 - Update
+  7 - Destroy
+
+What is REST and how does it relate to the resources routes?
+  REST stands for Representational state transfer and it is a software architectural style. This style relies on the communication protocol being stateless, client-server and cacheable.
+
+  After we have setup our routes, it will tell the browser where to GET, POST, PATCH or DELETE the resources in our site.
+
+What's the major difference between model backed and non-model backed form helpers?
+  Model backed forms are tied to an object (database column) and are created using form_for
+
+  Non model back form helps doesn't need to be a ruby object.
+
+How does form_for know how to build the <form> element?
+  form_for is a rails helper/convention.
+
+What's the general pattern we use in the actions that handle submission of model-backed forms (ie, the create and update actions)?
+
+How exactly do Rails validations get triggered? Where are the errors saved? How do we show the validation messages on the user interface?
+
+What are Rails helpers?
+  They are ruby methods that are accessible from parts or all of tha application. This depends if the method was created in the application_helper.rb file (accessible from all the applicaiton) or <controller>_helper.rb (only accessible from the controller.)
+
+What are Rails partials?
+  Partials are a section of a websites code that will be used over and over again.
+  The code is named with a _ in front of it. To call that code you then type in <%= render "/<controller>/<name>" %>
+
+When do we use partials vs helpers?
+  Helpers are used to create a ruby method that can be used in the controller and HTML code, where a partial is used to create parts of the HTML code.
+
+When do we use non-model backed forms?
+  When the form doesn't need to access a model

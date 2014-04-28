@@ -1,0 +1,15 @@
+<% if obj.errors.any? %>
+  <div class="alert alert-error">
+
+    <% if obj.errors.count == 1 %>
+      <H5>There is an error:</H5>
+    <% else %>
+      <H5>There were some errors:</H5>
+    <% end %>
+    <ul>
+    <% obj.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
