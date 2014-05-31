@@ -1,4 +1,4 @@
-PostitTemplate::Application.routes.draw do
+ PostitTemplate::Application.routes.draw do
   root to: 'posts#index'
 
   get "/register", to: 'users#new'

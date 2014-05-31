@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :require_user, :set_post
+  before_action :require_user 
+  before_action :set_post
 
   def create
     @comment = Comment.new(params.require(:comment).permit(:body))
@@ -18,12 +19,18 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @vote = Vote.create(voteable: @comment, user: current_user, vote: params[:vote])
 
-    if @vote.save
-      flash[:notice] = "Your vote has been counted"
-    else
-      flash[:error] = "You have already voted on this"
+    respond_to do |format|
+      # format.html do
+      #   if @vote.save
+      #     flash[:notice] = "Your vote has been counted"
+      #   else
+      #     flash[:error] = "You have already voted on this"
+      #   end
+      #   redirect_to :back
+
+      format.js
     end
-    redirect_to :back
+    
   end
 
   private
