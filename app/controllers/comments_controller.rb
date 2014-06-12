@@ -20,13 +20,15 @@ class CommentsController < ApplicationController
     @vote = Vote.create(voteable: @comment, user: current_user, vote: params[:vote])
 
     respond_to do |format|
-      # format.html do
-      #   if @vote.save
-      #     flash[:notice] = "Your vote has been counted"
-      #   else
-      #     flash[:error] = "You have already voted on this"
-      #   end
-      #   redirect_to :back
+      
+      format.html do
+        if @vote.save
+          flash[:notice] = "Your vote has been counted"
+        else
+          flash[:error] = "You have already voted on this"
+        end
+      redirect_to :back
+      end
 
       format.js
     end
@@ -35,6 +37,6 @@ class CommentsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by slug: params[:post_id]
   end
 end

@@ -21,6 +21,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin
+    access_denied unless current_user.admin?
+    
+  end
+
+  def access_denied
+    flash[:error] = "You can't access this area"
+    redirect_to root_path
+  end
+
   private
   def set_category
     @category_sort = Category.all.sort_by{|a| a.name}
